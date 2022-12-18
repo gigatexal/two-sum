@@ -26,7 +26,8 @@ def get_list_of_nums_and_target(file: str)-> InputAndTarget:
 
 def find_indexes_if_any(request: InputAndTarget)->Result:
     for index, value in enumerate(request.candidates):
-        if (compliment:= request.target - value) in request.candidates:
+        lookup_values = set(request.candidates)
+        if (compliment:= request.target - value) in lookup_values:
             indexes=set([tuple([index, value]), tuple([request.candidates.index(compliment), compliment])])
             return Result(indexes=indexes, found=True)
     return Result(indexes=set(), found=False)
